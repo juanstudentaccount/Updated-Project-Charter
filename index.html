@@ -680,7 +680,95 @@
       box-shadow: 0 20px 60px rgba(0,0,0,.1);
     }
 
-    @media print {
+    
+/* === Light Theme Contrast Fixes (injected) === */
+body.light {
+  color-scheme: light;
+}
+
+/* Cards/sections use light surfaces so dark text is readable */
+body.light details.section {
+  background: linear-gradient(135deg, #ffffff, #f8f9fd);
+  border-color: rgba(54,92,255,0.25);
+}
+body.light details.section[open] {
+  background: linear-gradient(135deg, #ffffff, #f3f6ff);
+  border-color: rgba(54,92,255,0.35);
+  box-shadow: 0 8px 24px rgba(54,92,255,0.12);
+}
+
+/* Headings inside summaries should be darker in light mode */
+body.light summary h2 {
+  color: #1e2a58;
+}
+
+/* Info cards & subboxes */
+body.light .student-info,
+body.light .subbox {
+  background: linear-gradient(135deg, #ffffff, #f8f9fd);
+  border-color: rgba(54,92,255,0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+/* Charts & timeline shells */
+body.light .chart-border,
+body.light .timeline {
+  background: linear-gradient(135deg, #ffffff, #f8f9fd);
+  border-color: rgba(54,92,255,0.25);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.05), 0 2px 6px rgba(0,0,0,.04);
+}
+
+/* Table row group header + hover states tuned for light backgrounds */
+body.light .row-group-header {
+  background: linear-gradient(135deg, rgba(54,92,255,0.10), rgba(54,92,255,0.05)) !important;
+}
+body.light tbody tr:hover {
+  background: rgba(54,92,255,0.08);
+  transform: scale(1.005);
+}
+
+/* "Value" fields already switched to light in the original CSS; keep borders subtle */
+body.light .value {
+  border-color: rgba(91,140,255,0.25);
+}
+
+/* Floating 'to top' button */
+body.light .to-top {
+  background: linear-gradient(135deg, #ffffffee, #f8f9fdee);
+  color: var(--ink);
+  border-color: rgba(91,140,255,0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* Override any inline dark background panels used in status boxes, etc. */
+body.light .body [style*="rgba(10,14,30"] {
+  background: linear-gradient(135deg, #ffffff, #f8f9fd) !important;
+  border-color: rgba(91,140,255,0.25) !important;
+}
+
+/* Make light theme chip backgrounds a touch brighter */
+body.light .chip {
+  background: linear-gradient(135deg, rgba(54,92,255,.18), rgba(54,92,255,.10));
+  border-color: rgba(54,92,255,0.35);
+}
+body.light .chip:hover {
+  background: linear-gradient(135deg, rgba(54,92,255,.28), rgba(54,92,255,.18));
+  border-color: rgba(54,92,255,0.55);
+  box-shadow: 0 4px 14px rgba(54,92,255,0.25);
+}
+
+/* Header remains blue; ensure summary chevrons inherit readable color */
+body.light summary svg.chev {
+  opacity: 0.85;
+}
+
+/* Improve general container elevation in light mode */
+body.light .container {
+  background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.35));
+  border-color: rgba(91,140,255,0.20);
+}
+/* === End Light Theme Contrast Fixes === */
+@media print {
       .page { padding: 0; }
       .top-controls, .to-top, .progress { display: none; }
       body { background: #fff; }
@@ -693,7 +781,216 @@
       .grid-2x2 { grid-template-columns: 1fr; }
       .content { padding: 20px; }
     }
-  </style>
+  
+/* ===================== Light Theme – Global Contrast & Readability ===================== */
+body.light {
+  /* variable overrides for light */
+  --bg: #f7f9ff;
+  --card: #ffffff;
+  --muted: #eef2ff;
+  --ink: #0e1330;
+  --ink-dim: #4b5563;
+  --brand: #365cff;
+  --brand-2: #5b8cff;
+  --accent-1: #7c3aed;
+  --accent-2: #059669;
+  --shadow: 0 8px 24px rgba(0,0,0,.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,.12);
+  color: var(--ink);
+}
+
+/* Base text & headings */
+body.light h1, body.light h2, body.light h3, body.light h4, body.light h5, body.light h6 {
+  color: #0e1330 !important;
+}
+body.light p, body.light li, body.light td, body.light th, body.light caption, body.light label, body.light small {
+  color: #111827 !important;
+}
+body.light a { color: #1d4ed8; }
+body.light a:hover { text-decoration: underline; }
+
+/* Cards / panels (generic) */
+body.light .card, 
+body.light .panel, 
+body.light .subbox, 
+body.light .note, 
+body.light .callout, 
+body.light .tile, 
+body.light .box {
+  background: #fff !important;
+  border: 1px solid rgba(54,92,255,0.18) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08) !important;
+}
+
+/* Top controls */
+body.light .top-controls {
+  background: rgba(0,0,0,.03) !important;
+  border-bottom: 1px solid #e3e6f0 !important;
+}
+
+/* Summary hover */
+body.light summary:hover {
+  background: rgba(54,92,255,0.08) !important;
+}
+
+/* Section subtitles/titles */
+body.light .subbox-title { color: #0e1330 !important; }
+body.light caption { color: var(--brand-2) !important; }
+
+/* Progress bars */
+body.light .progress {
+  box-shadow: 0 0 12px rgba(54,92,255,0.25) !important;
+}
+
+/* Images with blue borders */
+body.light img[style*="border:1px solid rgba(91,140,255"] {
+  border-color: rgba(91,140,255,0.35) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.10) !important;
+}
+
+/* SVG icon visibility */
+body.light svg[stroke] { stroke: #0e1330 !important; }
+body.light svg[fill]:not([fill="none"]) { fill: #0e1330 !important; }
+body.light .chev { stroke: #0e1330 !important; }
+
+/* ===================== Tables (Global + Stakeholder look) ===================== */
+body.light table {
+  width: 100%;
+  border: 1px solid rgba(54,92,255,0.20) !important;
+  background: #ffffff !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06) !important;
+}
+body.light thead th {
+  background: linear-gradient(135deg, #eaf0ff, #dde6ff) !important;
+  color: #0e1330 !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid rgba(54,92,255,0.25) !important;
+}
+body.light th, 
+body.light td {
+  padding: 10px 12px !important;
+}
+body.light tbody td {
+  border-bottom: 1px solid rgba(54,92,255,0.12) !important;
+  color: #0e1330 !important;
+  background: #ffffff !important;
+}
+body.light tbody tr:nth-child(even) td {
+  background: rgba(54,92,255,0.03) !important;
+}
+body.light tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Status pills */
+body.light .pill, body.light [data-pill] {
+  border-radius: 999px !important;
+  padding: 4px 10px !important;
+  font-weight: 700 !important;
+  display: inline-block !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06) !important;
+}
+body.light .ok    { background: rgba(16,185,129,0.18) !important; color: #065f46 !important; border: 1px solid #10b981 !important; }
+body.light .warn  { background: rgba(245,158,11,0.18) !important; color: #7c2d12 !important; border: 1px solid #f59e0b !important; }
+body.light .risk  { background: rgba(239,68,68,0.18) !important; color: #7f1d1d !important; border: 1px solid #ef4444 !important; }
+
+/* ===================== Stakeholder Quadrants & Tags ===================== */
+body.light .q-satisfied {
+  background: linear-gradient(135deg, rgba(16,185,129,0.20), rgba(16,185,129,0.10)) !important;
+  border: 1px solid #10b981 !important;
+}
+body.light .q-satisfied h4 { color: #065f46 !important; }
+body.light .q-manage {
+  background: linear-gradient(135deg, rgba(239,68,68,0.20), rgba(239,68,68,0.10)) !important;
+  border: 1px solid #ef4444 !important;
+}
+body.light .q-manage h4 { color: #7f1d1d !important; }
+body.light .q-monitor {
+  background: linear-gradient(135deg, rgba(245,158,11,0.20), rgba(245,158,11,0.10)) !important;
+  border: 1px solid #f59e0b !important;
+}
+body.light .q-monitor h4 { color: #7c2d12 !important; }
+body.light .q-informed {
+  background: linear-gradient(135deg, rgba(139,92,246,0.20), rgba(139,92,246,0.10)) !important;
+  border: 1px solid #8b5cf6 !important;
+}
+body.light .q-informed h4 { color: #4c1d95 !important; }
+
+/* Tags */
+body.light .tag.internal {
+  background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.08)) !important;
+  color: #065f46 !important;
+  border: 1px solid #10b981 !important;
+}
+body.light .tag.external {
+  background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.08)) !important;
+  color: #4c1d95 !important;
+  border: 1px solid #8b5cf6 !important;
+}
+body.light .tag.regulatory {
+  background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.08)) !important;
+  color: #7f1d1d !important;
+  border: 1px solid #ef4444 !important;
+}
+
+/* ===================== Inline-style Rescue Patterns (text too pale → darker) ===================== */
+/* Common pastel text colors → darker counterparts for readability */
+body.light [style*="color: #fca5a5"], body.light [style*="color:#fca5a5"] { color: #7f1d1d !important; }
+body.light [style*="color: #fdba74"], body.light [style*="color:#fdba74"] { color: #7c2d12 !important; }
+body.light [style*="color: #a7f3d0"], body.light [style*="color:#a7f3d0"] { color: #065f46 !important; }
+body.light [style*="color: #93c5fd"], body.light [style*="color:#93c5fd"] { color: #1e3a8a !important; }
+body.light [style*="color: #e9d5ff"], body.light [style*="color:#e9d5ff"] { color: #4c1d95 !important; }
+body.light [style*="color: var(--ink-dim)"] { color: #374151 !important; }
+
+/* Light transparent panels: add border/shadow to prevent washout */
+body.light [style*="background: linear-gradient"], 
+body.light [style*="background-image: linear-gradient"],
+body.light [style*="background:rgba("], 
+body.light [style*="background: rgba("] {
+  box-shadow: 0 4px 12px rgba(0,0,0,.08) !important;
+  border: 1px solid rgba(54,92,255,0.15) !important;
+  backdrop-filter: saturate(120%) !important;
+}
+
+/* Elements explicitly setting very light borders */
+body.light [style*="border:1px solid rgba("] {
+  border-color: rgba(54,92,255,0.28) !important;
+}
+
+/* Buttons / chips grouping */
+body.light .btn-group .chip {
+  background: #fff !important;
+  color: #0e1330 !important;
+  border: 1px solid rgba(54,92,255,0.20) !important;
+}
+
+/* ===================== Week 7 Status Report (apply stakeholder table styling) ===================== */
+body.light table.status-table {
+  border: 1px solid rgba(54,92,255,0.20) !important;
+  border-radius: 12px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06) !important;
+}
+body.light table.status-table thead th {
+  background: linear-gradient(135deg, #eaf0ff, #dde6ff) !important;
+  color: #0e1330 !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid rgba(54,92,255,0.25) !important;
+}
+body.light table.status-table tbody td {
+  border-bottom: 1px solid rgba(54,92,255,0.12) !important;
+}
+body.light table.status-table tbody tr:nth-child(even) td {
+  background: rgba(54,92,255,0.03) !important;
+}
+
+</style>
 </head>
 <body>
   <div class="progress" id="progress"></div>
@@ -741,18 +1038,18 @@
           </summary>
           <div class="body">
             <p><strong>Title:</strong> Career Advancement Preparation</p>
-            <p>The project I chose is to design and execute a Professional Career Advancement plan aimed at securing an entry level IT helpdesk position. This project will focus on completing industry recognized certificates, updating and adding value to my resume and enhance my LinkedIn profile, I also plan to create a portfolio and run a job search while also increasing my networking skills.</p>
+            <p>The project I chose is to design and execute a Professional Career Advancement plan aimed at securing an entry level IT helpdesk position. This project will focus on completing industry recognized certificates, updating and adding value to my resume and enhanceing my LinkedIn profile. I also plan to create a portfolio and run a job search which will help increase my networking skills.</p>
           </div>
         </details>
 
         <details class="section" id="s2">
           <summary>
-            <h2>2. Vision, Mission and Strategy</h2>
+            <h2>2. Mission, Vision and Strategy</h2>
             <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </summary>
           <div class="body">
-            <p><strong>Vision:</strong> Prepare myself to be a strong candidate for an entry level IT role by the end of the semester.</p>
             <p><strong>Mission:</strong> Execute a structured career plan, complete certificates, upgrade my resume and create a portfolio and network which will help me find jobs all with the end goal of supporting my career in IT.</p>
+            <p><strong>Vision:</strong> Prepare myself to be a strong candidate for an entry level IT role by the end of the semester.</p>
             <p><strong>Strategy:</strong> Follow a consistent well structured plan ensuring my deliverables are completed on time, create a portfolio that highlights my expertise, study for and complete industry wide accepted certificates.</p>
           </div>
         </details>
@@ -779,14 +1076,14 @@
               <li>Complete industry recognized certificates</li>
               <li>Update and refine my resume while also adding new details</li>
               <li>Create a professional portfolio that highlights my skills and abilities</li>
-              <li>Apply to 10 IT entry level jobs</li>
+              <li>Apply to 10 IT entry level helpdesk job positions</li>
               <li>Update my LinkedIn account to boost my online presence</li>
             </ul>
 
             <h3>Roadmap Items up to 6 Months After Semester Ends</h3>
             <ul>
               <li>Continue to update my resume and adding value to it</li>
-              <li>Apply for entry level positions to gain more experience</li>
+              <li>Continue to apply for new possitions and internships to gain more experience</li>
               <li>Continue to network in person and online via LinkedIn</li>
               <li>Present my finished portfolio to employers</li>
             </ul>
@@ -851,7 +1148,7 @@
                     <td>Provides access to certificates</td>
                     <td>High</td>
                     <td>High</td>
-                    <td>Study the required materials and prepare myself by studying</td>
+                    <td>Prepare myself by studying the certificate materials</td>
                   </tr>
                   <tr>
                     <td>Online community and LinkedIn</td>
@@ -872,10 +1169,10 @@
                   <tr>
                     <td>Future Employers</td>
                     <td>External</td>
-                    <td>Potential consumers of research outcomes, shows applied knowledge</td>
+                    <td>Potential internship and job opportunities </td>
                     <td>Low</td>
                     <td>High</td>
-                    <td>Highlight project on LinkedIn, discuss during career networking events</td>
+                    <td>Stand out on LinkedIn, and apply to 10 entery level jobs</td>
                   </tr>
                   <tr>
                     <td>General Public</td>
@@ -971,7 +1268,7 @@
               <div class="subbox-title">Key Trello Features for This Project</div>
               <ul>
                 <li><strong>Card Templates</strong> – quickly create repeatable task structures for releases and phases</li>
-                <li><strong>Checklists</strong> – break down deliverables (e.g., bibliography items, draft sections) into actionable steps</li>
+                <li><strong>Checklists</strong> – break down deliverables (e.g., Update resume, Create portfolio) into actionable steps</li>
                 <li><strong>Calendar View</strong> – map fixed dates for hybrid iterations and deadlines to stay on pace</li>
               </ul>
             </div>
@@ -1008,10 +1305,10 @@
                   <td>Update Resume structure and contents to target my goal which is to get an entry level IT helpdesk job.</td>
                   <td>
                     <ul>
-                      <li>Updated resume structure</li>
-                      <li>Updated resumes content targeting my entry level IT helpdesk job</li>
+                      <li>Updated resume structure by adding certificates</li>
+                      <li>Updated resume content targeting my entry level IT helpdesk job</li>
                       <li>Add additional experience</li>
-                      <li>Completed by September 30</li>
+                      <li>Completed by October 24</li>
                     </ul>
                   </td>
                 </tr>
@@ -1023,7 +1320,7 @@
                     <ul>
                       <li>Portfolio website created</li>
                       <li>All certificates displayed</li>
-                      <li>Project case studies included</li>
+                      <li>Show skills, strenghts and ahcievements</li>
                       <li>Contact information provided</li>
                     </ul>
                   </td>
@@ -1044,7 +1341,7 @@
                 <tr>
                   <td>LinkedIn Profile Enhancement</td>
                   <td>Tangible</td>
-                  <td>Update LinkedIn profile with new skills, certificates, and professional summary. Complete by October 15.</td>
+                  <td>Update LinkedIn profile with new skills, certificates, and professional summary. Complete by November 15.</td>
                   <td>
                     <ul>
                       <li>Profile is updated and targets it helpdesk position</li>
@@ -1093,8 +1390,8 @@
               </div>
 
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
-                <div style="background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.06)); border: 1px solid rgba(16,185,129,0.3); border-radius: 10px; padding: 16px;">
-                  <div style="font-weight: 700; color: #86efac; margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">✅ Accomplishments This Week</div>
+                <div style="background: linear-gradient(135deg, rgba(91,140,255,0.12), rgba(91,140,255,0.06)); border: 1px solid rgba(91,140,255,0.3); border-radius: 10px; padding: 16px;">
+                  <div style="font-weight: 700; color: var(--brand-2); margin-bottom: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">✅ Accomplishments This Week</div>
                   <ul style="margin: 0; padding-left: 20px; font-size: 14px;">
                     <li>Crafted new solid concise project for approval</li>
                     <li>Updated title and project description</li>
@@ -1279,7 +1576,24 @@
     };
     
     const stored = localStorage.getItem('theme');
-    if (stored) applyTheme(stored);
+    if (stored) {
+      applyTheme(stored);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      applyTheme('light');
+    }
+    // Follow OS changes until the user explicitly chooses
+    if (!stored && window.matchMedia) {
+      const mq = window.matchMedia('(prefers-color-scheme: light)');
+      if (mq.addEventListener) {
+        mq.addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
+        });
+      } else if (mq.addListener) {
+        mq.addListener((e) => {
+          if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
+        });
+      }
+    }
     
     document.getElementById('themeToggle')?.addEventListener('click', () => {
       const theme = document.body.classList.contains('light') ? 'dark' : 'light';
