@@ -768,6 +768,9 @@ body.light .container {
   border-color: rgba(91,140,255,0.20);
 }
 /* === End Light Theme Contrast Fixes === */
+/* Default dark color-scheme for controls */
+body:not(.light) { color-scheme: dark; }
+
 @media print {
       .page { padding: 0; }
       .top-controls, .to-top, .progress { display: none; }
@@ -1578,23 +1581,9 @@ body.light table.status-table tbody tr:nth-child(even) td {
     const stored = localStorage.getItem('theme');
     if (stored) {
       applyTheme(stored);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      applyTheme('light');
-    }
-    // Follow OS changes until the user explicitly chooses
-    if (!stored && window.matchMedia) {
-      const mq = window.matchMedia('(prefers-color-scheme: light)');
-      if (mq.addEventListener) {
-        mq.addEventListener('change', (e) => {
-          if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
-        });
-      } else if (mq.addListener) {
-        mq.addListener((e) => {
-          if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
-        });
-      }
-    }
-    
+    } else {
+  applyTheme('dark');
+}
     document.getElementById('themeToggle')?.addEventListener('click', () => {
       const theme = document.body.classList.contains('light') ? 'dark' : 'light';
       applyTheme(theme);
