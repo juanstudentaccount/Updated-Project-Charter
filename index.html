@@ -992,6 +992,61 @@ body.light table.status-table tbody tr:nth-child(even) td {
 }
 
 </style>
+
+
+
+<!-- === Injected: Tab Hover Effects (synced with Student Info colors) === -->
+<style id="tab-hover-effects">
+:root{
+  /* Match the student-info bar gradient via existing tokens */
+  --tabfx-accent-a: var(--brand);      /* e.g., #5b8cff */
+  --tabfx-accent-b: var(--brand-2);    /* e.g., #8ae6ff */
+  --tabfx-accent-c: var(--accent-1);   /* e.g., #a78bfa (used for glow mix) */
+}
+.tabfx {
+  position: relative;
+  contain: paint;
+  --mx: 50%;
+  --my: 50%;
+  --padX: 1rem;
+  transition: background .2s ease, padding .2s ease, transform .2s ease;
+  background: transparent;
+  border-radius: 12px;
+  z-index: 0;
+}
+/* Faint mouse-follow highlight */
+.tabfx::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(220px 220px at var(--mx) var(--my), color-mix(in srgb, var(--tabfx-accent-c) 22%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+/* Full-width underline bar using the same gradient family as student-info */
+.tabfx::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0; height:3px;
+  background: linear-gradient(90deg, var(--tabfx-accent-a), var(--tabfx-accent-b), var(--tabfx-accent-c));
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+  transition: transform .25s ease;
+  border-radius: 0 0 12px 12px;
+  z-index: 1;
+}
+.tabfx:hover{
+  background: color-mix(in srgb, var(--tabfx-accent-a) 10%, transparent);
+  padding-inline: calc(var(--padX) + .25rem);
+}
+.tabfx:hover::before{ opacity: 1; }
+.tabfx:hover::after{ transform: scaleX(1); }
+
+/* Specific elements we treat as "tabs" */
+details.section > summary.tabfx { border-radius: 12px; }
+.top-controls .chip.tabfx { border-radius: 999px; }
+</style>
+
 </head>
 <body>
 <div class="progress" id="progress"></div>
@@ -1865,5 +1920,32 @@ body.light table.status-table tbody tr:nth-child(even) td {
       });
     })();
   </script>
+
+<!-- === Injected: Tab Hover Effects JS (mouse tracking + class application) === -->
+<script id="tab-hover-effects-js">
+(()=>{
+  if (window.__tabFXLoaded) return; window.__tabFXLoaded = true;
+  const nodes = [
+    ...document.querySelectorAll('.top-controls .chip'),
+    ...document.querySelectorAll('details.section > summary'),
+    ...document.querySelectorAll('.nav .nav-link, nav .nav-link, .tabs .tab, .tabs a')
+  ];
+  nodes.forEach(el => el.classList.add('tabfx'));
+  const onMove = (e) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  };
+  nodes.forEach(el => {
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', () => {
+      el.style.removeProperty('--mx');
+      el.style.removeProperty('--my');
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
