@@ -741,7 +741,7 @@ body.light .to-top {
 }
 
 /* Override any inline dark background panels used in status boxes, etc. */
-body.light .body [style*="rgba(10,14,30"] {
+body.light [style*="rgba(10,14,30"] {
   background: linear-gradient(135deg, #ffffff, #f8f9fd) !important;
   border-color: rgba(91,140,255,0.25) !important;
 }
@@ -988,6 +988,14 @@ body.light table.status-table tbody td {
 }
 body.light table.status-table tbody tr:nth-child(even) td {
   background: rgba(54,92,255,0.03) !important;
+}
+
+
+/* Ensure all status report boxes look consistent in light theme */
+body.light .subbox {
+  background: linear-gradient(135deg, #ffffff, #f8f9fd) !important;
+  border-color: rgba(54,92,255,0.25) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06) !important;
 }
 
 </style>
